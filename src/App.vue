@@ -28,15 +28,21 @@ const toggleDark = () => {
   dark.value = !dark.value;
 };
 
-const getToggleText = () => `Switch to ${dark.value ? 'Light' : 'Dark'} mode`
+const getToggleText = () => `Switch to ${dark.value ? 'Light' : 'Dark'} mode`;
 </script>
 
 <template>
   <div v-bind:class="{ dark }">
-    <h1 class="text-3xl font-bold underline bg-white dark:bg-slate-800 dark:text-white">
+    <router-view></router-view>
+    <router-link to="/">Home page</router-link> |
+    <router-link to="/Characters/">Characters Page</router-link> |
+    <router-link to="/Characters/32">Characters Page</router-link>
+    <h1
+      class="text-3xl font-bold underline bg-white dark:bg-slate-800 dark:text-white"
+    >
       Hello world!
     </h1>
-    <button type="button" @click="toggleDark()">{{getToggleText()}}</button>
+    <button type="button" @click="toggleDark()">{{ getToggleText() }}</button>
     <div>
       <a href="https://vitejs.dev" target="_blank">
         <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -51,8 +57,12 @@ const getToggleText = () => `Switch to ${dark.value ? 'Light' : 'Dark'} mode`
       <li v-for="person in people" :key="person.email" class="py-4 flex">
         <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
         <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900 dark:text-white">{{ person.name }}</p>
-          <p class="text-sm text-gray-500 dark:text-slate-400">{{ person.email }}</p>
+          <p class="text-sm font-medium text-gray-900 dark:text-white">
+            {{ person.name }}
+          </p>
+          <p class="text-sm text-gray-500 dark:text-slate-400">
+            {{ person.email }}
+          </p>
         </div>
       </li>
     </ul>
