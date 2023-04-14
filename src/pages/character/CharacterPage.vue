@@ -3,7 +3,14 @@ console.log('character page');
 </script>
 
 <template>
-  <div>This is the character page for {{ $route.params.id }}</div>
+  <div class="flex flex-col max-w-md p-6 dark:bg-gray-900 dark:text-gray-100">
+		<img src="https://source.unsplash.com/200x200/?portrait?2" alt="" class="flex-shrink-0 object-cover h-64 rounded-sm sm:h-96 dark:bg-gray-500 aspect-square">
+		<div>
+			<h2 class="text-xl font-semibold">Leroy Jenkins</h2>
+			<span class="block pb-2 text-sm dark:text-gray-400">CTO of Company Inc.</span>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+		</div>
+	</div>
 </template>
 
 <style scoped>

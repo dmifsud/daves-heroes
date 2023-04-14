@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue';
 import { ref } from 'vue';
+import { AppTheme } from './models/app/theme';
 const dark = ref(false);
 
 const people = [
@@ -26,46 +27,79 @@ const people = [
 
 const toggleDark = () => {
   dark.value = !dark.value;
+  // TODO: create app store and set value there, then on app load, hydrate value from localStorage
+  const updateTheme: AppTheme = {
+    dark: dark.value 
+  };
+  // TODO: move local storage handling to a separate helper.
+  localStorage.setItem('theme', JSON.stringify(updateTheme));
 };
 
 const getToggleText = () => `Switch to ${dark.value ? 'Light' : 'Dark'} mode`;
+
+// On load
+// TODO: to clean up
+const theme = JSON.parse(localStorage.getItem('theme') ?? '{"dark":true}') as AppTheme;
+dark.value = theme.dark;
 </script>
 
 <template>
-  <div v-bind:class="{ dark }">
-    <router-view></router-view>
-    <router-link to="/">Home page</router-link> |
-    <router-link to="/characters/">Characters Page</router-link> |
-    <router-link to="/characters/32">Characters Page</router-link>
-    <h1
-      class="text-3xl font-bold underline bg-white dark:bg-slate-800 dark:text-white"
-    >
-      Hello world!
-    </h1>
-    <button type="button" @click="toggleDark()">{{ getToggleText() }}</button>
-    <div>
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
-    </div>
-    <HelloWorld msg="Vite + Vue" />
-
-    <ul class="divide-y divide-gray-200 dark:bg-slate-800">
-      <li v-for="person in people" :key="person.email" class="py-4 flex">
-        <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
-        <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900 dark:text-white">
-            {{ person.name }}
-          </p>
-          <p class="text-sm text-gray-500 dark:text-slate-400">
-            {{ person.email }}
-          </p>
+  <div v-bind:class="{ dark }" class='min-h-screen'>
+    <div class='dark:bg-slate-600 min-h-screen'>
+    <nav
+        class="fixed w-full flex items-center justify-between flex-wrap dark:bg-slate-900  bg-white py-4 lg:px-12 shadow border-solid border-t-2 border-blue-700">
+        <div class="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
+            <div class="flex items-center flex-shrink-0 text-gray-800 mr-16">
+                <span class="font-semibold text-xl tracking-tight dark:text-white">Dave&rsquo;s Heroes</span>
+            </div>
+            <div class="block lg:hidden ">
+                <button
+                    id="nav"
+                    class="flex items-center px-3 py-2 border-2 rounded text-blue-700 border-blue-700 hover:text-blue-700 hover:border-blue-700">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                    </svg>
+                </button>
+            </div>
         </div>
-      </li>
-    </ul>
+    
+        <div class="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
+            <div class="text-md font-bold text-blue-700 lg:flex-grow">
+              <router-link to="/" active-class="border-b-2"
+                class="block mt-4 lg:inline-block lg:mt-0 hover:text-slate-700 dark:text-white dark:hover:text-slate-300 px-4 py-2 hover:bg-blue-700 mr-2"
+                >Home page
+              </router-link>
+
+              <router-link to="/characters/" active-class="border-b-2"
+                class="block mt-4 lg:inline-block lg:mt-0 hover:text-slate-700 dark:text-white dark:hover:text-slate-300 px-4 py-2 hover:bg-blue-700 mr-2"
+                >Characters
+              </router-link>
+                
+            </div>
+            
+            <div class="flex ">
+              <button type="button" class='dark:text-white' @click="toggleDark()">{{ getToggleText() }}</button>
+                <a href="#"
+                    disabled
+                   class="cursor-default block text-md px-4 py-2 rounded text-blue-700 ml-2 font-bold mt-4 hover:bg-blue-700 lg:mt-0">Sign
+                    in</a>
+    
+                <a href="#"
+                  disabled
+                   class="cursor-default block text-md px-4  ml-2 py-2 rounded text-blue-700 font-bold mt-4 hover:bg-blue-700 lg:mt-0">login</a>
+            </div>
+        </div>
+    
+    </nav>
+    
+    <div class='router-view'>
+      <router-view></router-view>
+    </div>
+    
+    
+  </div>
+    
+    
   </div>
 </template>
 
@@ -83,5 +117,9 @@ const getToggleText = () => `Switch to ${dark.value ? 'Light' : 'Dark'} mode`;
 
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+
+.router-view {
+  padding: calc(80px + 2rem) 2rem 2rem 2rem
 }
 </style>

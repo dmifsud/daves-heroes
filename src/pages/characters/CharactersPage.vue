@@ -17,7 +17,7 @@ console.log('characters page');
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <router-link 
       :to="`/characters/${character.id}`"
-      class="cursor-pointer text-slate-600 dark:text-white dark:bg-slate-800 hover:bg-slate-100 shadow-md max-w-sm w-full lg:max-w-full lg:flex rounded-l rounded-r border-r border-b border-l border-t border-slate-200" 
+      class="cursor-pointer text-slate-600 dark:text-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 shadow-md max-w-sm w-full lg:max-w-full lg:flex rounded-l rounded-r border-r border-b border-l border-t border-slate-200 dark:border-slate-800" 
       v-for='character in characters' :key='character.id'
       >
    
@@ -49,45 +49,6 @@ console.log('characters page');
       </router-link> 
   </div>
 
-
-
-
-  <!-- <table
-    class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
-    <thead>
-      <tr class='bg-slate-50 dark:bg-slate-700'>
-        <th
-          class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
-          Name</th>
-        <th
-          class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
-          Status</th>
-        <th
-          class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
-          Species</th>
-        <th
-          class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
-          Type</th>
-        <th
-          class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
-          Gender</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for='character in characters' :key='character.id'>
-        <td class='border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-left'>{{
-          character.name }}</td>
-        <td class='border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-left'>{{
-          character.status }}</td>
-        <td class='border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-left'>{{
-          character.species }}</td>
-        <td class='border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-left'>{{
-          character.type }}</td>
-        <td class='border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-left'>{{
-          character.gender }}</td>
-      </tr>
-    </tbody>
-  </table> -->
   <TablePagination :pagination='pagination' @on-navigate='onNavigate($event)' />
 </template>
 
