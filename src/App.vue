@@ -67,7 +67,7 @@ dark.value = theme.dark;
             <div class="text-md font-bold text-blue-700 lg:flex-grow">
               <router-link to="/" active-class="border-b-2"
                 class="block mt-4 lg:inline-block lg:mt-0 hover:text-slate-700 dark:text-white dark:hover:text-slate-300 px-4 py-2 hover:bg-blue-700 mr-2"
-                >Home page
+                >Home
               </router-link>
 
               <router-link to="/characters/" active-class="border-b-2"
