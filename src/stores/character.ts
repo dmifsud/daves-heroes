@@ -11,7 +11,7 @@ export const useCharacter = defineStore('character-store', {
             data: null,
             loading: false,
             loaded: false
-        } 
+        }
     },
 
     getters: {
@@ -23,6 +23,14 @@ export const useCharacter = defineStore('character-store', {
             return state.loading;
         },
 
+        episodeAppearance(state): string {
+            return (state.data?.episode ?? [])
+                .map(
+                    episodeUrl => 
+                        episodeUrl.replace('https://rickandmortyapi.com/api/episode/', '')
+                    )
+                .join(', ');
+        }
     },
 
     actions: {

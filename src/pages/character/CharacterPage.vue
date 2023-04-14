@@ -17,12 +17,19 @@ console.log('character page');
         <table class="border-collapse border border-slate-400 w-full">
           <tbody>
             <tr>
-              <td class='border border-slate-300'>Status</td>
-              <td class='border border-slate-300'>Type</td>
+              <td class='border border-slate-300 p-2'>Status</td>
+              <td class='border border-slate-300 p-2'>{{ character.status }}</td>
+
+
             </tr>
             <tr>
-              <td class='border border-slate-300'>{{ character.status }}</td>
-              <td class='border border-slate-300'>{{ character.type || 'N/A' }}</td>
+              <td class='border border-slate-300 p-2'>Type</td>
+              <td class='border border-slate-300 p-2'>{{ character.type || 'N/A' }}</td>
+
+            </tr>
+            <tr>
+              <td class='border border-slate-300 p-2'>Appears in Episodes</td>
+              <td class='border border-slate-300 p-2'>{{ episodes }}</td>
             </tr>
           </tbody>
         </table>
@@ -37,7 +44,7 @@ console.log('character page');
 
 export default {
   computed: {
-    ...mapState(useCharacter, { character: 'data', loading: 'isLoading' })
+    ...mapState(useCharacter, { character: 'data', loading: 'isLoading', episodes: 'episodeAppearance' })
   },
   methods: {
     ...mapActions(useCharacter, ['fetchCharacter']),
