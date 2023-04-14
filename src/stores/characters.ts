@@ -42,7 +42,7 @@ export const useCharacters = defineStore('characters-store', {
     actions: {
         async fetchCharacters(pageUrl?: string) {
             this.loading = true;
-            const response = await fetch(pageUrl ?? 'https://rickandmortyapi.com/api/character');
+            const response = await fetch(pageUrl ?? 'https://rickandmortyapi.com/api/character/');
             try {
                 const result = await response.json() as ApiResponse<Character>;
                 this.data = result.results;
