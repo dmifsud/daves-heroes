@@ -35,8 +35,8 @@ const getToggleText = () => `Switch to ${dark.value ? 'Light' : 'Dark'} mode`;
   <div v-bind:class="{ dark }">
     <router-view></router-view>
     <router-link to="/">Home page</router-link> |
-    <router-link to="/Characters/">Characters Page</router-link> |
-    <router-link to="/Characters/32">Characters Page</router-link>
+    <router-link to="/characters/">Characters Page</router-link> |
+    <router-link to="/characters/32">Characters Page</router-link>
     <h1
       class="text-3xl font-bold underline bg-white dark:bg-slate-800 dark:text-white"
     >
