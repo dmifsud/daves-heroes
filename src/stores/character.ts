@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { Character } from '../models/dto/characters';
+import { API_STATIC } from '../api/api.static';
 
 export const useCharacter = defineStore('character-store', {
     state: (): { // TODO: extract this to StateSlice
@@ -36,7 +37,7 @@ export const useCharacter = defineStore('character-store', {
     actions: {
         async fetchCharacter(id: number) {
             this.loading = true;
-            const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
+            const response = await fetch(API_STATIC.getCharacter(id));
             try {
                 const result = await response.json() as Character;
                 this.data = result;

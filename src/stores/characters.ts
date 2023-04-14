@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { Character } from '../models/dto/characters';
 import { Pagination } from '../models/dto/pagination';
 import { ApiResponse } from '../models/dto/api-response';
+import { API_STATIC } from '../api/api.static';
 
 export const useCharacters = defineStore('characters-store', {
     state: (): { // TODO: extract this to StateSlice
@@ -42,7 +43,7 @@ export const useCharacters = defineStore('characters-store', {
     actions: {
         async fetchCharacters(pageUrl?: string) {
             this.loading = true;
-            const response = await fetch(pageUrl ?? 'https://rickandmortyapi.com/api/character/');
+            const response = await fetch(pageUrl ?? API_STATIC.getCharacters()); // TODO: update to something like axios
             try {
                 const result = await response.json() as ApiResponse<Character>;
                 this.data = result.results;
